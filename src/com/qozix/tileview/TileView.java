@@ -821,6 +821,11 @@ public class TileView extends ZoomPanLayout {
 		pathManager.setShouldDraw( true );
 	}
 
+	public void resumeTiles() {
+		tileManager.resumeRender();
+		tileManager.requestRender();
+	}
+
 	/**
 	 * Request the TileView reevaluate tile sets, rendered tiles, samples, invalidates, etc
 	 */

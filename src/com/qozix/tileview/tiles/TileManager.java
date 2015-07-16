@@ -91,7 +91,6 @@ public class TileManager extends ScalingLayout implements DetailLevelEventListen
 
 	public void requestRender() {
 		// if we're requesting it, we must really want one
-		renderIsCancelled = false;
 		renderIsSuppressed = false;
 		// if there's no data about the current detail level, don't bother
 		if ( detailLevelToRender == null ) {
@@ -114,6 +113,10 @@ public class TileManager extends ScalingLayout implements DetailLevelEventListen
 	public void suppressRender() {
 		// this will prevent new tasks from starting, but won't actually cancel the currently executing task
 		renderIsSuppressed = true;
+	}
+
+	public void resumeRender() {
+		renderIsCancelled = false;
 	}
 
 	public void updateTileSet() {
