@@ -53,6 +53,7 @@ public class ZoomPanLayout extends ViewGroup {
 	private double maxScale = 1;
 
 	private boolean scaleToFit = true;
+	private boolean scaleToWidth = false;
 
 	private Point pinchStartScroll = new Point();
 	private Point pinchStartOffset = new Point();
@@ -179,6 +180,11 @@ public class ZoomPanLayout extends ViewGroup {
 		calculateMinimumScaleToFit();
 	}
 
+	public void setScaleToWidth( boolean shouldScaleToWidth ) {
+		scaleToWidth = shouldScaleToWidth;
+		calculateScaleToWidth();
+	}
+
 	/**
 	 * Set minimum and maximum scale values for this ZoomPanLayout. 
 	 * Note that if {@link shouldScaleToFit} is set to true, the minimum value set here will be ignored
@@ -188,7 +194,7 @@ public class ZoomPanLayout extends ViewGroup {
 	 */
 	public void setScaleLimits( double min, double max ) {
 		// if scaleToFit is set, don't allow overwrite
-		if ( !scaleToFit ) {
+		if ( !scaleToFit && !scaleToWidth ) {
 			minScale = min;
 		}
 		maxScale = max;
@@ -541,7 +547,7 @@ public class ZoomPanLayout extends ViewGroup {
 		h = Math.max( h, getSuggestedMinimumHeight() );
 		w = resolveSize( w, widthMeasureSpec );
 		h = resolveSize( h, heightMeasureSpec );
-		setMeasuredDimension( w, h );
+		setMeasuredDimension(w, h);
 	}
 
 	@Override
@@ -549,7 +555,11 @@ public class ZoomPanLayout extends ViewGroup {
 		clip.layout( 0, 0, clip.getMeasuredWidth(), clip.getMeasuredHeight() );
 		constrainScroll();
 		if ( changed ) {
-			calculateMinimumScaleToFit();
+			if (scaleToWidth) {
+				calculateScaleToWidth();
+			} else {
+				calculateMinimumScaleToFit();
+			}
 		}
 	}
 
@@ -561,6 +571,16 @@ public class ZoomPanLayout extends ViewGroup {
 			if ( recalculatedMinScale != minScale ) {
 				minScale = recalculatedMinScale;
 				setScale( scale );
+			}
+		}
+	}
+
+	private void calculateScaleToWidth() {
+		if (scaleToWidth) {
+			double recalculatedMinScale = getWidth() / (double) baseWidth;
+			if (recalculatedMinScale != minScale) {
+				minScale = recalculatedMinScale;
+				setScale(scale);
 			}
 		}
 	}
