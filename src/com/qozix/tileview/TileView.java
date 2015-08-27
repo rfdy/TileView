@@ -822,6 +822,7 @@ public class TileView extends ZoomPanLayout {
 	}
 
 	public void resumeTiles() {
+		sampleManager.update();
 		tileManager.resumeRender();
 		tileManager.requestRender();
 	}
