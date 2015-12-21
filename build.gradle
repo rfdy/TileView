@@ -1,24 +1,8 @@
-// Top-level build file where you can 
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
 	   minSdkVersion 8
@@ -34,7 +18,7 @@ android {
 }
 
 dependencies {
-    compile ('com.android.support:appcompat-v7:23.1.0')
+    compile 'com.android.support:appcompat-v7:' + rootProject.ext.androidSupportVersion
     compile 'com.jakewharton:disklrucache:2.0.2'
 }
 
