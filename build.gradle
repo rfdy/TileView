@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:' + rootProject.ext.androidSupportVersion
+    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
     compile 'com.jakewharton:disklrucache:2.0.2'
 }
 
