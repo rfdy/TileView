@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.support.v4.util.LruCache;
+import androidx.collection.LruCache;
 
 
 import com.jakewharton.disklrucache.DiskLruCache;
